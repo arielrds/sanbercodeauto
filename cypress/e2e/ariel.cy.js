@@ -119,21 +119,16 @@ describe('OrangeHRM - Login Feature Automation', () => {
     cy.get('.orangehrm-forgot-password-title').should('contain', 'Reset Password');
   });
 
-  it('TC-LGN-12: Login gagal karena internet terputus', () => {
-    // Simulasi status jaringan offline menggunakan fitur Network Emulation di browser melalui Cypress
-    cy.intercept('**', (req) => {
-      req.destroy(); // Memutus semua request keluar untuk meniru kondisi tanpa internet
-    });
+it('TC-LGN-12: Verifikasi link Facebook di footer berfungsi dan mengarah ke URL yang benar', () => {
+    cy.get('.orangehrm-login-footer-sm a')
+      .eq(1) // Elemen link kedua biasanya Facebook
+      .should('be.visible')
+      .and('have.attr', 'href')
+      .and('include', 'facebook.com');
 
-    cy.get('input[name="username"]').type('Admin');
-    cy.get('input[name="password"]').type('admin123');
-    cy.get('button[type="submit"]').click();
-
-    // Catatan: Cypress akan mendeteksi network error / page load failure. 
-    // Bagian assertions di bawah menyesuaikan dengan behavior browser saat mendeteksi kegagalan koneksi.
-    cy.on('fail', (error) => {
-      expect(error.message).to.include('net::ERR_INTERNET_DISCONNECTED');
-      return false; // Mencegah test langsung failed agar status assertion terpenuhi (passed)
+    cy.get('.orangehrm-login-footer-sm a').eq(1).then(($link) => {
+      const url = $link.prop('href');
+     
     });
   });
 
