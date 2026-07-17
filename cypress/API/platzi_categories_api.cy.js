@@ -2,9 +2,7 @@ describe('Platzi Fake Store API - Categories Automation Tests (12 Requests)', ()
   const baseUrl = 'https://api.escuelajs.co/api/v1/categories';
   let createdCategoryId; // Variabel untuk menyimpan ID dari kategori yang baru dibuat
 
-  // ==========================================
   // 1. GET REQUESTS (Membaca Data)
-  // ==========================================
 
   it('REQ-01: GET All Categories - Verifikasi semua kategori berhasil diambil', () => {
     cy.request('GET', baseUrl).then((response) => {
@@ -44,9 +42,7 @@ describe('Platzi Fake Store API - Categories Automation Tests (12 Requests)', ()
     });
   });
 
-  // ==========================================
   // 2. POST REQUESTS (Membuat Data Baru)
-  // ==========================================
 
   it('REQ-05: POST Create Category Valid - Berhasil membuat kategori baru', () => {
     const uniqueName = `Category Testing ${Math.floor(Math.random() * 10000)}`;
@@ -89,9 +85,7 @@ describe('Platzi Fake Store API - Categories Automation Tests (12 Requests)', ()
     });
   });
 
-  // ==========================================
   // 3. PUT REQUESTS (Mengubah Data)
-  // ==========================================
 
   it('REQ-08: PUT Update Category Valid - Berhasil memperbarui nama kategori yang baru dibuat', () => {
     // Pastikan ID kategori hasil REQ-05 tersedia
@@ -135,9 +129,7 @@ describe('Platzi Fake Store API - Categories Automation Tests (12 Requests)', ()
     });
   });
 
-  // ==========================================
   // 4. DELETE REQUESTS (Menghapus Data)
-  // ==========================================
 
   it('REQ-11: DELETE Category Valid - Berhasil menghapus kategori yang dibuat di REQ-05', () => {
     expect(createdCategoryId).to.not.be.undefined;
